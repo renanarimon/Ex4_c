@@ -16,12 +16,12 @@ typedef struct Node {
     struct Node *next;
 } node, *pNode;
 
-void build_graph_cmd(pNode *head);
-void insert_node_cmd(pNode *head);
-void delete_node_cmd(pNode *head);
-void printGraph_cmd(); //for self debug
-void deleteGraph_cmd(pNode* head);
-void shortsPath_cmd(pNode head);
-void TSP_cmd(pNode head);
+// void build_graph_cmd(pNode *head);
+// void insert_node_cmd(pNode *head);
+// void delete_node_cmd(pNode *head);
+// void printGraph_cmd(); //for self debug
+// void deleteGraph_cmd(pNode* head);
+// void shortsPath_cmd(pNode head);
+// void TSP_cmd(pNode head);
 
 #endif

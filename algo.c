@@ -9,7 +9,7 @@
 
 
 static pNode graphNodes;
-static int minPath;
+static int minPath = __INT_MAX__;
 // static edges* graphEdges;
 pNode GetNode(int data);
 void deleteGraph_cmd();
@@ -77,6 +77,7 @@ void addEdges(pNode node)
     pEdge e = (pEdge)malloc(sizeof(edge));
     if (scanf("%d", &num1) == 1)
     {
+
         if (scanf("%d", &num2) == 1)
         {
             e->weight = num2;
@@ -84,6 +85,8 @@ void addEdges(pNode node)
             e->dest = GetNode(num1);
             e->next = NULL;
         }
+    }else{
+        return;
     }
 
     scanf("%c", &ch);
@@ -292,6 +295,7 @@ int shortestPath(int src, int dest){
 }
 void combinationUtil(int arr[], int n, int index,int data[], int i)
 {
+
     if (index == n) {
         int sum=0;
         for (int j = 0; j < n-1; ++j) {
@@ -299,10 +303,11 @@ void combinationUtil(int arr[], int n, int index,int data[], int i)
         }
         if(sum<minPath){
             minPath=sum;
+            return;
         }
     }
 
-    if (i > n)
+    if (i >= n)
         return;
     data[index] = arr[i];
     combinationUtil(arr, n,  index + 1, data, i + 1);
@@ -310,14 +315,17 @@ void combinationUtil(int arr[], int n, int index,int data[], int i)
 }
 
 void TSP(int num){
+    minPath = __INT_MAX__;
     int cities[num];
     int n;
     for(int i=0; i<num; i++){
-        cities[i] = scanf("%d",&n);
+       scanf("%d",&n);
+       cities[i]=n;
     }
-    minPath=__INT_MAX__;
+
     int data[num];
     combinationUtil(cities, num, 0, data, 0);
-    printf("TSP shortest path: %d",minPath);
+    printf("TSP shortest path: %d\n",minPath);
 }
+
 

@@ -1,43 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "algo.h"
-// #include "graph.h"
+#include "graph.h"
 
 int main()
 {
     char ch;
     int num;
-    while (scanf("%c", &ch) == 1 && ch != '~')
+    int num2;
+    int ans = 0;
+    while (1)
     {
-        switch (ch)
-        {
-        case 'A':
+        scanf("%c", &ch);
+        if (ch == 'A') {
             scanf("%d", &num);
             createNodes(num);
-            // printGraph_cmd();
+            printGraph_cmd();
+            printf("end A\n");
 
-            break;
-        case 'n':
-            printf("n");
+        }
+        if(ch == 'n') {
             createGraph();
             printGraph_cmd();
-            break;
-        case 'B':
-            break;
+            printf("end n\n");
+        }
+        if(ch == 'B') {
+            addNode();
+            printGraph_cmd();
+            printf("end B\n");
+        }
+        if(ch == 'D') {
+            scanf("%d", &num);
+            deleteNode(num);
+            printGraph_cmd();
+        }
+        if(ch == 'S') {
+            printf("in s\n");
+            scanf("%d", &num);
+            scanf("%d", &num2);
+            ans = shortestPath(num, num2);
+            printf("Dijsktra shortest path:%d", ans);
+        }
+        if(ch == 'T') {
+            scanf("%d", &num);
+            TSP(num);
 
-        case 'D':
-            break;
-
-        case 'S':
-            break;
-
-        case 'T':
-            break;
-
-        default:
+        }
+        if(ch == '\n') {
+            deleteGraph_cmd();
             break;
         }
+
     }
 
     return 0;

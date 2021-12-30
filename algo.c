@@ -314,17 +314,36 @@ void combinationUtil(int arr[], int n, int index,int data[], int i)
     combinationUtil(arr, n,  index, data, i + 1);
 }
 
+void tspForTwo(int arr[],int data[]){
+    int x = shortestPath(arr[0],arr[1]);
+    int y = shortestPath(arr[1],arr[0]);
+    int sum =((x < y) ? x : y);
+    if (sum<minPath){
+        minPath=sum;
+    }
+
+}
+
 void TSP(int num){
     minPath = __INT_MAX__;
     int cities[num];
     int n;
     for(int i=0; i<num; i++){
-       scanf("%d",&n);
-       cities[i]=n;
+        scanf("%d",&n);
+        cities[i]=n;
     }
 
     int data[num];
-    combinationUtil(cities, num, 0, data, 0);
+    if(num==2){
+        tspForTwo(cities,data);
+    } else {
+        combinationUtil(cities, num, 0, data, 0);
+    }
+    if (minPath < 0)
+    {
+        minPath = -1;
+    }
+    
     printf("TSP shortest path: %d\n",minPath);
 }
 

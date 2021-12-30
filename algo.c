@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include "graph.h"
 #include "priorityQueue.h"
+#define INF 1000000
 
 
 static pNode graphNodes;
-static int minPath = __INT_MAX__;
+static int minPath = INF;
 // static edges* graphEdges;
 pNode GetNode(int data);
 void deleteGraph_cmd();
@@ -39,7 +40,7 @@ pNode createNode(int id, pNode next, pEdge edge){
     tmp->nodeId = id;
     tmp->next = next;
     tmp->edges = edge;
-    tmp->weight = __INT_MAX__;
+    tmp->weight = INF;
     tmp->parent = NULL;
     return tmp;
 }
@@ -242,7 +243,7 @@ void deleteGraph_cmd()
 void restartGraph(){
     pNode tmp = graphNodes;
     while (tmp){
-        tmp->weight = __INT_MAX__;
+        tmp->weight = INF;
         tmp->parent = NULL;
         tmp->visited = 0;
         tmp = tmp->next;
@@ -293,58 +294,54 @@ int shortestPath(int src, int dest){
     pNode d =GetNode(dest);
     return d->weight;
 }
-void combinationUtil(int arr[], int n, int index,int data[], int i)
+void swap(int *x, int *y)
 {
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
 
-    if (index == n) {
-        int sum=0;
+
+void permutation(int a[], int size, int n) {
+    if (size == 1) {
+        int sum = 0;
         for (int j = 0; j < n-1; ++j) {
-            sum+= shortestPath(data[j],data[j+1]);
+            sum += shortestPath(a[j], a[j + 1]);
         }
-        if(sum<minPath){
-            minPath=sum;
+        if (sum < minPath) {
+            minPath = sum;
             return;
         }
     }
 
-    if (i >= n)
-        return;
-    data[index] = arr[i];
-    combinationUtil(arr, n,  index + 1, data, i + 1);
-    combinationUtil(arr, n,  index, data, i + 1);
-}
+    for (int i = 0; i < size; i++) {
+        permutation(a, size - 1, n);
 
-void tspForTwo(int arr[],int data[]){
-    int x = shortestPath(arr[0],arr[1]);
-    int y = shortestPath(arr[1],arr[0]);
-    int sum =((x < y) ? x : y);
-    if (sum<minPath){
-        minPath=sum;
+        // if size is odd, swap 0th i.e (first) and
+        // (size-1)th i.e (last) element
+        if (size % 2 == 1)
+            swap(&a[0], &a[size - 1]);
+
+            // If size is even, swap ith and
+            // (size-1)th i.e (last) element
+        else
+            swap(&a[i], &a[size - 1]);
     }
 
 }
 
-void TSP(int num){
-    minPath = __INT_MAX__;
+void TSP(int num) {
+    minPath = INF;
     int cities[num];
     int n;
-    for(int i=0; i<num; i++){
-        scanf("%d",&n);
-        cities[i]=n;
+    for (int i = 0; i < num; i++) {
+        scanf("%d", &n);
+        cities[i] = n;
     }
-
-    int data[num];
-    if(num==2){
-        tspForTwo(cities,data);
-    } else {
-        combinationUtil(cities, num, 0, data, 0);
-    }
-    if (minPath < 0)
-    {
+    permutation(cities, num, num);
+    if(minPath == INF){
         minPath = -1;
     }
-    
-    printf("TSP shortest path: %d\n",minPath);
+    printf("TSP shortest path: %d\n", minPath);
 }
-
-

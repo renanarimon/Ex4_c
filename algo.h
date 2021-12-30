@@ -24,6 +24,8 @@ pNode createNode(int id, pNode next, pEdge edge);
 pNode getLast();
 void freeEdgesOfNode(pNode p);
 int shortestPath(int src, int dest);
-void combinationUtil(int arr[], int n, int index,int data[], int i);
 void TSP(int num);
+void swap(int *x, int *y);
+void permutation(int a[], int size, int n);
+
 #endif //EX4_ALGO_H

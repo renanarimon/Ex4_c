@@ -343,5 +343,5 @@ void TSP(int num) {
     if(minPath == INF){
         minPath = -1;
     }
-    printf("TSP shortest path: %d\n", minPath);
+    printf("TSP shortest path: %d \n", minPath);
 }

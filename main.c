@@ -30,7 +30,7 @@ int main()
             scanf("%d", &num);
             scanf("%d", &num2);
             ans = shortestPath(num, num2);
-            printf("Dijsktra shortest path: %d\n", ans);
+            printf("Dijsktra shortest path: %d \n", ans);
         }
         if(ch == 'T') {
             scanf("%d", &num);

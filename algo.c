@@ -8,10 +8,8 @@
 #include "priorityQueue.h"
 #define INF 1000000
 
-
 static pNode graphNodes;
 static int minPath = INF;
-// static edges* graphEdges;
 pNode GetNode(int data);
 void deleteGraph_cmd();
 
@@ -87,6 +85,7 @@ void addEdges(pNode node)
             e->next = NULL;
         }
     }else{
+        // free(e); // @
         return;
     }
 
@@ -197,7 +196,6 @@ void deleteNode(int num) {
     while (p) {
         pEdge e = p->edges;
         while (e) {
-
             if (e->dest == del) {
                 p->edges = e->next;
                 pEdge pe = e;
@@ -208,6 +206,7 @@ void deleteNode(int num) {
                 if (tmp != NULL && tmp->dest == del) {
                     e->next = tmp->next;
                     free(tmp);
+
                 } else {
                     e = tmp;
                 }
@@ -234,10 +233,12 @@ void deleteGraph_cmd()
     while (tmp)
     {
         nodeId = tmp->nodeId;
-        deleteNode(nodeId);
         tmp = tmp->next;
+        deleteNode(nodeId);
+
     }
-    graphNodes = NULL;
+    free(tmp);
+   graphNodes = NULL;
 }
 
 void restartGraph(){
@@ -268,9 +269,13 @@ void dijkstra(int src, int dest){
     pqNode* pq = newNode(srcNode, srcNode->weight);
     pqNode** head = &pq;
     while (isEmpty(head) == 0){
-        pqNode* curr = pop(head);
+        pqNode* curr = peek(head);
         if(curr->data->visited == 0){
             if(curr->data->nodeId == dest){
+                while (isEmpty(head) == 0){
+                    pop(head);
+                }
+                free(pq);
                 return;
             }
             curr->data->visited = 1;
@@ -285,8 +290,13 @@ void dijkstra(int src, int dest){
                 e = e->next;
             }
         }
-
+        pop(head);
     }
+    
+//    while (isEmpty(head) == 0){
+//        pop(head);
+//    }
+    free(pq);
 }
 
 int shortestPath(int src, int dest){

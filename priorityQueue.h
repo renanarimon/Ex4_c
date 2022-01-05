@@ -16,9 +16,14 @@ typedef struct PQNode {
 } pqNode;
 
 pqNode* newNode(pNode d, int p);
-pNode peek(pqNode** head);
-pqNode* pop(pqNode** head);
+pqNode* peek(pqNode** head);
+void pop(pqNode** head);
 void push(pqNode** head, pNode d, int p);
 int isEmpty(pqNode** head);
+
+
+
+
+
 
 #endif //EX4_PRIORITYQUEUE_H

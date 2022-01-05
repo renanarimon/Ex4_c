@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "priorityQueue.h"
 
-// Node
 
 // Function to Create A New Node
 pqNode* newNode(pNode d, int p)
@@ -19,19 +18,18 @@ pqNode* newNode(pNode d, int p)
 }
 
 // Return the value at head
-pNode peek(pqNode** head)
+pqNode* peek(pqNode** head)
 {
-    return (*head)->data;
+    return *head;
 }
 
 // Removes the element with the
 // highest priority form the list
-pqNode* pop(pqNode** head)
+void pop(pqNode** head)
 {
     pqNode* temp = *head;
     *head = (*head)->next;
-    return temp;
-//    free(temp);
+    free(temp);
 
 }
 

@@ -8,7 +8,6 @@
 #include "priorityQueue.h"
 #define INF 1000000
 
-static pNode graphNodes;
 static int minPath = INF;
 //pNode GetNode(int data);
 void deleteGraph_cmd();
@@ -55,7 +54,7 @@ pNode createNode(int id, pNode next, pEdge edge){
 void createNodes(int size, pNode h)
 {
     if(h->next != NULL){
-        deleteGraph_cmd();
+        deleteGraph_cmd(h);
     }
     pNode tmp = createNode(size - 1, NULL, NULL);
     for (int i = size - 2; i >=0; i--)

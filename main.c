@@ -1,58 +1,46 @@
 #include <stdio.h>
 #include <string.h>
-#include "algo.h"
+#include <stdlib.h>
 #include "graph.h"
-#define INF 1000000
+#include "algo.h"
 
-int main()
-{
+int main() {
+    pNode head = createNode(-1,NULL);
     char ch;
-    int num;
-    int num2;
-    int ans = 0;
-
-
-    pNode head = createNode(-1, NULL, NULL);
-//    head->nodeId = -1;
-//    head->next = NULL;
-//    head->edges = NULL;
-//    head->weight = INF;
-//    head->parent = NULL;
-
-    while (1)
-    {
-        scanf("%c", &ch);
-        if (ch == 'A') {
-            scanf("%d", &num);
-            createNodes(num, head);
+    while (scanf(" %c",&ch) != EOF){
+        while (1){
+            if(ch=='A'){
+                ch =createGraph(head);
+                continue;
+            }
+            if(ch == 'B'){
+                ch = insert_node_cmd(head);
+                continue;
+            }
+            if(ch == 'D'){
+                delete_node_cmd(head);
+                break;
+            }
+            if(ch == 'S'){
+                shortestPath(head);
+                break;
+            }
+            if(ch == 'T') {
+                TSP(head);
+                break;
+            }
+            else{
+                break;
+            }
         }
-        if(ch == 'n') {
-            createGraph(head);
-        }
-        if(ch == 'B') {
-            addNode(head);
-        }
-        if(ch == 'D') {
-            scanf("%d", &num);
-            deleteNode(num,head);
-        }
-        if(ch == 'S') {
-            scanf("%d", &num);
-            scanf("%d", &num2);
-            ans = shortestPath(num, num2,head);
-            printf("Dijsktra shortest path: %d \n", ans);
-        }
-        if(ch == 'T') {
-            scanf("%d", &num);
-            TSP(num ,head);
-        }
-        if(ch == '\n') {
-            deleteGraph_cmd(head);
-            break;
-        }
-
+    }
+    pNode node1 = head->next;
+    while (node1){
+        pNode next = node1->next;
+        removeNode(head,node1->id);
+        node1 = next;
     }
     free(head);
-
+    head=NULL;
     return 0;
 }

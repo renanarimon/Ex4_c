@@ -1,29 +1,31 @@
-#ifndef GRAPH_
-#define GRAPH_
+//
+// Created by PC on 12/29/2021.
+//
+
+#ifndef EX4_ALGO_H
+#define EX4_ALGO_H
+
+#include<stdio.h>
+#include<stdlib.h>
 #include "graph.h"
 
-pNode createNode(int id, pNode next);
-pNode getNode(pNode head,int id);
-void addNode(pNode head, int id);
-void removeNode(pNode head, int id);
-void FreeEdges(pNode head,int id);
-pEdge createEdge(int weight, int dest);
-pEdge getEdge(pNode src, int dest);
-void addEdge(pNode src, int weight, int dest);
-void delEdge(pNode src,int dest);
-char createGraph(pNode head);
-char insert_node_cmd(pNode head);
-void delete_node_cmd(pNode head);
-void deleteGraph_cmd(pNode head);
-void restartGraph(pNode h);
-
+void createNodes(int);
+void printGraph_cmd();
+pNode GetNode(int data);
+void addEdges(pNode node);
+void addNode();
+void createGraph();
+void deleteNode(int num);
+void deleteGraph_cmd();
+void relax(pNode src, pNode dest, pEdge e);
+void dijkstra(int src, int dest);
+int contains(int nodeId);
+pNode createNode(int id, pNode next, pEdge edge);
+pNode getLast();
+void freeEdgesOfNode(pNode p);
+int shortestPath(int src, int dest);
+void TSP(int num);
 void swap(int *x, int *y);
-int permute(int cities[], int l, int r, int len, int currWeight, pNode head, int ans[]);
-void dijkstra (pNode head,int key);
-void shortestPath(pNode head);
-void TSP(pNode head);
+void permutation(int a[], int size, int n);
 
-
-
-
-#endif
+#endif //EX4_ALGO_H

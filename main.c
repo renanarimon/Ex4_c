@@ -1,46 +1,47 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include "graph.h"
 #include "algo.h"
+#include "graph.h"
 
-int main() {
-    pNode head = createNode(-1,NULL);
+int main()
+{
     char ch;
-    while (scanf(" %c",&ch) != EOF){
-        while (1){
-            if(ch=='A'){
-                ch =createGraph(head);
-                continue;
-            }
-            if(ch == 'B'){
-                ch = insert_node_cmd(head);
-                continue;
-            }
-            if(ch == 'D'){
-                delete_node_cmd(head);
-                break;
-            }
-            if(ch == 'S'){
-                shortestPath(head);
-                break;
-            }
-            if(ch == 'T') {
-                TSP(head);
-                break;
-            }
-            else{
-                break;
-            }
+    int num;
+    int num2;
+    int ans = 0;
+    while (1)
+    {
+        scanf("%c", &ch);
+        if (ch == 'A') {
+            scanf("%d", &num);
+            createNodes(num);
         }
+        if(ch == 'n') {
+            createGraph();
+        }
+        if(ch == 'B') {
+            addNode();
+        }
+        if(ch == 'D') {
+            scanf("%d", &num);
+            deleteNode(num);
+        }
+        if(ch == 'S') {
+            scanf("%d", &num);
+            scanf("%d", &num2);
+            ans = shortestPath(num, num2);
+            printf("Dijsktra shortest path: %d \n", ans);
+        }
+        if(ch == 'T') {
+            scanf("%d", &num);
+            TSP(num);
+        }
+        if(ch == '\n') {
+            deleteGraph_cmd();
+            break;
+        }
+
     }
-    pNode node1 = head->next;
-    while (node1){
-        pNode next = node1->next;
-        removeNode(head,node1->id);
-        node1 = next;
-    }
-    free(head);
-    head=NULL;
+
     return 0;
 }

@@ -1,18 +1,29 @@
+//
+// Created by PC on 12/29/2021.
+//
+#include "graph.h"
 #ifndef EX4_PRIORITYQUEUE_H
 #define EX4_PRIORITYQUEUE_H
 
-typedef struct Queue {
-    pNode pri_que[1000];
-    int front;
-    int rear;
-}priorityQueue, *pQueue;
+typedef struct PQNode {
 
-pQueue createPriortyQueue();
-void push(pQueue queue, pNode n);
-pNode pop(pQueue queue);
-void check(pQueue queue,pNode n);
-void displayQueue(pQueue queue);
-int isEmpty(pQueue queue);
+    pNode data;
+    // Lower values indicate higher priority
+    int priority;
+
+    struct PQNode *next;
+
+} pqNode;
+
+pqNode* newNode(pNode d, int p);
+pqNode* peek(pqNode** head);
+void pop(pqNode** head);
+void push(pqNode** head, pNode d, int p);
+int isEmpty(pqNode** head);
+
+
+
+
 
 
 #endif //EX4_PRIORITYQUEUE_H

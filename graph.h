@@ -1,22 +1,22 @@
-#ifndef EX4_EDGE_H
-#define EX4_EDGE_H
+#ifndef GRAPH
+#define GRAPH
 
+typedef struct Node *pNode;
 
-typedef struct Edge {
+typedef struct edge {
     int weight;
-    int dest;
-    struct Edge *next;
+    pNode dest;
+    struct edge* next;
 } edge, *pEdge;
 
-typedef struct Node{
-    int id;
-    struct Node* next;
-    struct Edge* Edges;
+
+typedef struct Node {
+    int nodeId;
     int weight;
-    struct Node* father;
+    pEdge edges;
+    struct Node* next;
+    struct Node* parent;
     int visited;
-}node,*pNode;
+} node;
 
-
-
-#endif //EX4_EDGE_H
+#endif
